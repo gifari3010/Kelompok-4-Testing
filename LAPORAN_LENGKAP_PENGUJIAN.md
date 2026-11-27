@@ -4,10 +4,10 @@
 Teknik Informatika, Universitas Pamulang - Tahun Akademik 2026/2027
 Anggota: Gifari Arliansyah (231011401190), Kaka Aditya (231011400167), Haikal Ammanu (231011402378), Rafi Hibban Hafizh (231011402071)
 **Target:** https://qatiarent.com/ | **Batas pengumpulan:** 19 Desember 2026
-**Versi laporan:** 1.1 - 21 November 2026 (perapihan repo & pelengkapan dokumen)
+**Versi laporan:** 1.2 - 27 November 2026 (revisi metode: white box dicabut setelah evaluasi ulang — tidak ada akses kode sumber; kasus "white box sisi klien" direklasifikasi menjadi grey box. Versi 1.1: 21 November 2026, perapihan repo & pelengkapan dokumen)
 
 ## Ringkasan Eksekutif
-Kelompok menguji portal rental pakaian Qatiarent berdasarkan standar ISO/IEC/IEEE 29119-1:2022, ISO/IEC 25010:2023, ISO/IEC 25040:2024, dan ISO/IEC/IEEE 29119-5:2024. Pengujian manual (black box, white box sisi klien, grey box) dan otomatis (pytest + requests; Playwright) dilaksanakan pada 21 November 2026. Hasil: 13 kasus manual PASS, 1 FAIL, 3 defect tercatat, suite otomatis HTTP 5/5 PASS. Wawancara QA profesional **belum dilaksanakan** dan dijadwalkan sesuai timeline (dokumen hasil disiapkan sebagai template jujur, bukan karangan).
+Kelompok menguji portal rental pakaian Qatiarent berdasarkan standar ISO/IEC/IEEE 29119-1:2022, ISO/IEC 25010:2023, ISO/IEC 25040:2024, dan ISO/IEC/IEEE 29119-5:2024. Pengujian manual (black box, grey box) dan otomatis (pytest + requests; Playwright) dilaksanakan pada 21 November 2026. White box **tidak dilakukan**: kelompok tidak memiliki akses kode sumber Qatiarent (aplikasi pihak ketiga), dan setelah evaluasi ulang pada 27 November 2026 pemeriksaan artefak teknis publik yang semula dilabeli "white box sisi klien" direklasifikasi menjadi grey box. Hasil: 13 kasus manual PASS, 1 FAIL, 3 defect tercatat, suite otomatis HTTP 5/5 PASS. Wawancara QA profesional **belum dilaksanakan** dan dijadwalkan sesuai timeline (dokumen hasil disiapkan sebagai template jujur, bukan karangan).
 
 ## 1. Pemilihan Aplikasi (Ketentuan Poin 1)
 Qatiarent adalah portal rental pakaian yang sudah berjalan, dioperasikan sebagai bisnis lokal (area Bandung) berskala menengah ke bawah, dibuat/dikelola perusahaan - memenuhi kriteria tugas. Bukti lengkap: `reports/BUKTI_PEMILIHAN_APLIKASI.md`. Fitur yang diuji: filter kota/durasi/pengiriman/tanggal pemakaian, daftar produk (230 hasil), detail produk, Cek Jadwal.
@@ -17,7 +17,7 @@ Standar terverifikasi rentang 2022-2026: ISO/IEC/IEEE 29119-1:2022 (General conc
 
 ## 3. Pengujian yang Dilakukan (Poin 3)
 - **Manual Black Box** (EP, BVA, decision table): kasus `docs/03_TEST_CASES_BLACK_BOX.md`, eksekusi `reports/MANUAL_TEST_EXECUTION_REPORT.md`.
-- **Manual White Box & Grey Box**: terbatas sisi klien karena tidak ada akses kode sumber pemilik (dinyatakan terbuka sebagai batasan) - kasus `docs/04_TEST_CASES_WHITE_GREY_BOX.md`.
+- **Manual Grey Box**: manipulasi parameter berdasarkan pengetahuan struktur sebagian + inspeksi artefak teknis publik (header HTTP, HTML awal, robots.txt, sitemap.xml, pola redirect) - kasus `docs/04_TEST_CASES_GREY_BOX.md`. White box tidak dilakukan karena tidak ada akses kode sumber pemilik; batasan ini dinyatakan terbuka, dan evaluasi ulangnya dicatat di dokumen kasus uji tersebut.
 - **Otomatis**: script Playwright (UI) dan requests (HTTP) di `tests/`; hasil `reports/AUTOMATED_TEST_REPORT.md` (HTTP 5/5 PASS; suite Playwright siap jalan dan perlu dieksekusi ulang dari jaringan tanpa proxy pembatas).
 - **Temuan**: 3 defect (header keamanan belum lengkap - medium; konten bergantung penuh pada JS - low; normalisasi parameter tanpa pemberitahuan - low) di `reports/DEFECT_LOG.md`.
 - **Metrik kualitas** ISO 25010: `docs/05_METRIK_KUALITAS_ISO_25010.md`.
@@ -29,7 +29,7 @@ Status: **belum dilaksanakan** per 21 November 2026. Pedoman, syarat narasumber 
 Seluruh laporan tersusun dalam satu repositori ini dengan struktur `docs/` (perencanaan & kasus uji), `reports/` (hasil & bukti), `tests/` (script otomasi). Pada 21 November 2026 repo dirapikan: dua file duplikat di root (`01_TEST_PLAN_ISO_29119.md` versi lama dan `02_TIMELINE.md` yang identik) dihapus karena versi resminya ada di `docs/`.
 
 ## 6. Alasan Metode & Jurnal (Poin 6)
-Pemilihan kombinasi black/white/grey box, teknik EP/BVA/decision table, otomasi Playwright, dan evaluasi ISO 25010 didukung jurnal internasional (Empirical Software Engineering 2026; IJSEKE 2023; AJRCOS 2025; CEOG 2024) dan jurnal SINTA 1-3 (JSINBIS - SINTA 2; JUTI - SINTA 2; JuTISI - SINTA 3). Uraian lengkap: `docs/06_LANDASAN_METODE.md`.
+Pemilihan kombinasi black box + grey box (white box tidak dilakukan — mensyaratkan akses kode sumber yang tidak dimiliki kelompok), teknik EP/BVA/decision table, otomasi Playwright, dan evaluasi ISO 25010 didukung jurnal internasional (Empirical Software Engineering 2026; IJSEKE 2023; AJRCOS 2025; CEOG 2024) dan jurnal SINTA 1-3 (JSINBIS - SINTA 2; JUTI - SINTA 2; JuTISI - SINTA 3). Uraian lengkap: `docs/06_LANDASAN_METODE.md`.
 
 ## 7. Kesimpulan & Saran
 Fungsionalitas inti Qatiarent (katalog, filter, penanganan parameter) bekerja baik pada pengujian 21 November 2026. Kelemahan utama ada pada pengerasan keamanan sisi header dan ketergantungan rendering JavaScript. Untuk pemilik aplikasi: lengkapi header keamanan dan pertimbangkan SSR. Untuk kelompok: lengkapi eksekusi visual + screenshot, jalankan suite Playwright dari jaringan kampus, dan laksanakan wawancara sebelum 11 Desember 2026.
@@ -39,7 +39,7 @@ Fungsionalitas inti Qatiarent (katalog, filter, penanganan parameter) bekerja ba
 |---|---|
 | 1. Aplikasi web skala menengah ke bawah, perusahaan/komunitas | SELESAI - Qatiarent, bukti di reports/ |
 | 2. Dokumentasi standar IEEE/ISO 2022-2026 | SELESAI - docs/06 (terverifikasi, dengan koreksi judul resmi) |
-| 3. Testing manual (black/white/grey) + otomatis dari awal sampai akhir | SEBAGIAN BESAR SELESAI - eksekusi tercatat; sisa: screenshot visual & eksekusi Playwright dari jaringan tanpa proxy |
+| 3. Testing manual (black box, grey box) + otomatis dari awal sampai akhir | SEBAGIAN BESAR SELESAI - eksekusi tercatat; white box tidak dilakukan (tanpa akses kode sumber, dinyatakan terbuka); sisa: screenshot visual & eksekusi Playwright dari jaringan tanpa proxy |
 | 4. Wawancara QA profesional >= 3 tahun | BELUM - pedoman siap, pelaksanaan terjadwal (paling lambat 11 Des 2026) |
 | 5. Laporan di GitHub, satu repositori terstruktur | SELESAI - repo ini, duplikat dibersihkan |
 | 6. Alasan metode + jurnal internasional & SINTA 1-3 | SELESAI - docs/06 (dengan catatan verifikasi ulang peringkat SINTA saat pengumpulan) |

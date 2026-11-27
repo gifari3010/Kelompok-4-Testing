@@ -14,7 +14,7 @@ Tugas Testing & Quality Assurance - Teknik Informatika, Universitas Pamulang (20
 | `docs/01_TEST_PLAN_ISO_29119.md` | Rencana pengujian |
 | `docs/02_TIMELINE.md` | Jadwal pengerjaan |
 | `docs/03_TEST_CASES_BLACK_BOX.md` | Kasus uji black box (EP, BVA, decision table) |
-| `docs/04_TEST_CASES_WHITE_GREY_BOX.md` | Kasus uji white box sisi klien & grey box + batasannya |
+| `docs/04_TEST_CASES_GREY_BOX.md` | Kasus uji grey box (termasuk inspeksi artefak teknis publik) + evaluasi ulang metode: white box tidak dilakukan karena tidak ada akses kode sumber |
 | `docs/05_METRIK_KUALITAS_ISO_25010.md` | Metrik & evaluasi kualitas ISO 25010:2023 |
 | `docs/06_LANDASAN_METODE.md` | Standar 2022-2026, alasan metode, referensi jurnal (internasional & SINTA 1-3) |
 | `docs/07_PEDOMAN_WAWANCARA.md` | Pedoman & pertanyaan wawancara QA profesional |
