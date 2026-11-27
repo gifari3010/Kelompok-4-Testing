@@ -2,7 +2,9 @@
 
 **Target:** https://qatiarent.com/ | **Tanggal eksekusi:** 21 November 2026
 **Penguji:** Kelompok 4 (dibantu eksekusi teknis terverifikasi dari lingkungan uji kelompok)
-**Metode:** Black box (EP, BVA, decision table), white box sisi klien, grey box - lihat `docs/03` dan `docs/04`.
+**Metode:** Black box (EP, BVA, decision table) dan grey box - lihat `docs/03` dan `docs/04`. White box tidak dilakukan (tidak ada akses kode sumber).
+
+> **Catatan revisi 27 November 2026:** Kasus yang pada eksekusi 21 November sempat dilabeli "white box sisi klien" (WB-01 s.d. WB-05) direklasifikasi menjadi grey box **GB-06 s.d. GB-10**, karena white box mensyaratkan akses kode sumber yang tidak dimiliki kelompok. Hasil eksekusi dan status setiap kasus **tidak berubah** — yang berubah hanya klasifikasi metodenya.
 
 > Kejujuran hasil: tabel ini hanya memuat kasus yang benar-benar dieksekusi dan teramati hasilnya pada tanggal di atas. Kasus yang memerlukan interaksi visual lanjutan di UI ditandai sebagai "Sebagian" dan wajib dilengkapi tangkapan layar oleh penguji saat sesi manual di browser.
 
@@ -18,11 +20,11 @@
 | BB-15 | Injeksi script via parameter | Status 200; string `<script>alert(1)</script>` tidak terefleksi mentah pada respons | PASS |
 | BB-16 | Parameter 2000 karakter | Status 200; dinormalisasi ke default; tanpa 5xx | PASS |
 | BB-04, BB-06 s.d. BB-10, BB-12 | BVA tanggal/durasi lewat UI, decision table kombinasi filter, pagination UI | Belum dieksekusi penuh secara visual pada sesi ini | SEBAGIAN - lengkapi saat sesi manual kelompok + screenshot |
-| WB-01 | Header keamanan | CSP hanya `upgrade-insecure-requests`; HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy **tidak ada** | FAIL -> Defect D-01 |
-| WB-02 | Struktur HTML awal | HTML awal tidak memuat form/input/img produk (0 ditemukan); konten dirender sisi klien (JavaScript) | CATATAN -> Defect D-02 (dampak SEO/aksesibilitas) |
-| WB-03 | robots.txt | 200, ukuran 67 byte | PASS |
-| WB-04 | sitemap.xml | 200, ukuran 545 byte | PASS |
-| WB-05 | Pola redirect beranda | Konsisten: tanggal pemakaian terisi H+2 dari tanggal akses | PASS |
+| GB-06 | Header keamanan | CSP hanya `upgrade-insecure-requests`; HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy **tidak ada** | FAIL -> Defect D-01 |
+| GB-07 | Struktur HTML awal | HTML awal tidak memuat form/input/img produk (0 ditemukan); konten dirender sisi klien (JavaScript) | CATATAN -> Defect D-02 (dampak SEO/aksesibilitas) |
+| GB-08 | robots.txt | 200, ukuran 67 byte | PASS |
+| GB-09 | sitemap.xml | 200, ukuran 545 byte | PASS |
+| GB-10 | Pola redirect beranda | Konsisten: tanggal pemakaian terisi H+2 dari tanggal akses | PASS |
 | GB-01 s.d. GB-04 | Manipulasi parameter (grey box) | Semua dinormalisasi ke default tanpa error 5xx; tidak ada refleksi script | PASS |
 | GB-05 | Konsistensi harga daftar vs detail | Memerlukan klik detail produk secara visual | SEBAGIAN |
 
