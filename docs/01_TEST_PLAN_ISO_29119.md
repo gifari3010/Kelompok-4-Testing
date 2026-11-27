@@ -8,16 +8,18 @@
 
 | Parameter | Deskripsi |
 |---|---|
-| Judul Proyek | Analisis Pengujian Kualitas dan Fungsionalitas Website Qatiarent Menggunakan Pengujian Manual (Black Box, White Box) dan Otomatis Berdasarkan Standar ISO/IEC 25010:2023 |
+| Judul Proyek | Analisis Pengujian Kualitas dan Fungsionalitas Website Qatiarent Menggunakan Pengujian Manual (Black Box, Grey Box) dan Otomatis Berdasarkan Standar ISO/IEC 25010:2023 |
 | Nama Aplikasi / Target | Website Resmi Qatiarent |
 | URL Target | https://qatiarent.com/ |
 | Tim Penyusun (Kelompok) | 1. Gifari Arliansyah (NIM: 231011401190)<br>2. Kaka Aditya (NIM: 231011400167)<br>3. Haikal Ammanu (NIM: 231011402378)<br>4. Rafi Hibban Hafizh (NIM: 231011402071) |
 | Mata Kuliah | Testing & Quality Assurance (QA) |
 | Program Studi / Institusi | Teknik Informatika, Universitas Pamulang |
 | Tahun Akademik | 2026/2027 |
-| Versi Dokumen | 1.0 |
+| Versi Dokumen | 1.1 (revisi 27 November 2026: white box dicabut dari metode — lihat catatan revisi di bawah) |
 | Tanggal | 18 November 2026 |
 | Batas Pengumpulan | 19 Desember 2026 |
+
+> **Catatan revisi 1.1 (27 November 2026):** Metode dievaluasi ulang. Versi 1.0 mencantumkan white box (termasuk label "white box sisi klien"), padahal kelompok tidak memiliki akses kode sumber Qatiarent dan kondisi itu sudah dikonfirmasi ulang. White box **dicabut** dari rencana: metode resmi proyek ini adalah black box + grey box + otomasi. Pemeriksaan artefak teknis publik yang semula dilabeli white box direklasifikasi menjadi grey box — lihat `docs/04_TEST_CASES_GREY_BOX.md`.
 
 ## 2. Latar Belakang dan Tujuan
 
@@ -74,7 +76,7 @@ Fitur yang teridentifikasi dari parameter URL situs (`city`, `duration`, `shippi
 | Jenis | Teknik | Alat | Keterangan |
 |---|---|---|---|
 | Manual - Black box | Equivalence partitioning, boundary value, decision table | Browser, spreadsheet kasus uji | Dokumen `03_TEST_CASES_BLACK_BOX.md` |
-| Manual - White box | Analisis struktur dari sisi klien (HTML/CSS/JS, console, network) | Chrome DevTools | Terbatas karena tanpa akses source code; atau penuh bila pemilik memberi akses |
+| Manual - Grey box | Manipulasi parameter berdasarkan pengetahuan struktur + inspeksi artefak teknis publik (header HTTP, HTML awal, robots.txt, sitemap.xml, pola redirect) | Browser, Chrome DevTools | Dokumen `04_TEST_CASES_GREY_BOX.md` |
 | Otomatis | Script end-to-end | Playwright (atau Selenium) + GitHub Actions | Folder `tests/` |
 | Non-fungsional | Audit performa/aksesibilitas | Lighthouse, WAVE | Hasil di `reports/` |
 | Wawancara | Wawancara QA profesional (≥3 tahun) | Daring / luring | `reports/WAWANCARA_QA_PROFESIONAL.md` |
@@ -100,7 +102,7 @@ Fitur yang teridentifikasi dari parameter URL situs (`city`, `duration`, `shippi
 
 | Risiko | Dampak | Mitigasi |
 |---|---|---|
-| Tidak ada akses source code | White box terbatas | Lakukan analisis sisi klien, nyatakan batasan |
+| Tidak ada akses source code | White box tidak dapat dilakukan | White box dinyatakan terbuka sebagai metode yang TIDAK dilakukan; cakupan pengujian dialihkan ke grey box (pengetahuan struktur sebagian + artefak teknis publik) |
 | Situs berubah saat pengujian | Hasil tak konsisten | Catat tanggal/versi, simpan screenshot |
 | Narasumber QA sulit dijadwalkan | Telat wawancara | Hubungi mulai minggu pertama |
 | Tes otomatis memicu pemblokiran | Tes gagal | Atur jeda wajar antar aksi, jangan paralel berlebihan |
@@ -110,7 +112,7 @@ Fitur yang teridentifikasi dari parameter URL situs (`city`, `duration`, `shippi
 | Anggota | Peran |
 |---|---|
 | Gifari Arliansyah | Test lead, penulis test plan, laporan |
-| Kaka Aditya | Penguji manual (black box, white box) |
+| Kaka Aditya | Penguji manual (black box, grey box) |
 | Haikal Ammanu | Otomasi (Playwright, CI) |
 | Rafi Hibban Hafizh | Wawancara QA, kajian jurnal |
 
